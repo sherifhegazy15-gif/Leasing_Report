@@ -264,7 +264,7 @@
 <section style="padding-top:0">
   <div class="wrap">
     <div class="shead"><span class="n">V.</span><h2 class="serif">Creative on the feed</h2><span class="ln"></span></div>
-    <p class="lead-in">Live Meta previews of June's running creatives with what each delivered this month. The video hook <b>V1</b> alone drove 81% of residential leads at the lowest cost per lead.</p>
+    <p class="lead-in">Every running creative — <b>6 residential</b> (V1, V2 video; S1, S2, S4 static; S3 paused) and <b>2 retail</b> (S1, S2). The video hook <b>V1</b> drove 81% of residential leads, while static <b>S2</b> quietly posted the lowest CPL of the set at AED 14.60.</p>
     <div class="ads" id="adgrid"></div>
   </div>
 </section>
@@ -335,7 +335,7 @@ const daily = [
   ["19",705,31],["20",621,31],["21",549,21],["22",584,17],["23",549,20],["24",0,0],["25",452,20]
 ];
 const ads = [
-  {nm:"V1",seg:"res",vid:true,name:"Starting From Just 55,000 AED",
+  {nm:"V1",seg:"res",vid:true,tag:"Top volume",name:"Starting From Just 55,000 AED",
    body:"Rent more than an apartment — rent a lifestyle you never want to leave. Swimmable lagoon pool, floating-island gym, Zen & Miracle Garden views. Studios, 1–3 BHK.",
    id:"AQJFnBDhfHcsdLocy7A6QlYStyS2d70jvTtbYTKaCVB2g8ShVjmO-CYjaOvEI2BRR_6zTpZJ_SQj6VErHf5altAMvaWL-gw97xUN7JRGaU1pMhZ1CPWizTJ3bjxMgEJuOGAgefDfyxP_gQlKMHeUQG-KmQKgw5DnLnoBkdUOs-uKjEboD-6vTxY-SVWgUBzTj0VIjswJ6dwnk_-VqmZq0EzjHQeKP713KOTxPikhleEoMA",
    t:"AQJCiSo2TMicaiGxvpE", spend:"14,211",ctr:"2.06%",leads:"600",cpl:"23.69",win:true},
@@ -347,10 +347,26 @@ const ads = [
    body:"Rent more than an apartment — rent a lifestyle. Dubai's most unique wellness address. Studios, 1, 2 & 3 BHK available for rent. Units filling up fast.",
    id:"AQI6ch9cbFuEKjGSIx23uG54YCjdnx9hbwAv14FYzsbMYBkh8upjuF7lZh-FNC8XdfVcYdxFeMU9mYaqnMsfnwtU3idEspFwjMVUOVohmHij5Om-tU4nnF-zx7dq7nr_KSUAOYAulVLi8NsX4oRTWce_152qKzDiYICriqIvgFlDSTA_tRORG2gUoBptbhSD88-mGdLpDFVAz2LJ14GsCKhDczGVqF7TW_ePJiUY8mSz1A",
    t:"AQJy7AdB4J3VSD4oXGU", spend:"1,251",ctr:"1.51%",leads:"38",cpl:"32.93"},
+  {nm:"S2",seg:"res",vid:false,tag:"Lowest CPL",name:"Step Into a Lifestyle Shaped by Wellness & Luxury",
+   body:"Ready to move in — Studio to 3BHK designer apartments. 25+ wellness amenities, opposite Miracle Garden. Now leasing.",
+   id:"AQJe2OGEVt2gHpazhRfA7fY_K84bjmw8yZqdLgUGEjlogEmU9cLVWLjWBSjzIBvs2S9lEUbXJWeirGuEQVA6c0cBxcGU0Ee3XpBCZ5JSr4UL-dDmZ9V5yX4Na4OkA_0IXBHrwTQvrC5EiwPhd687X6S5cvxMuWu7hpeeJunu5GcN5OxGcPp9RGg8-CmdcBIQJqr07-a4MPT9Iesjf11636MLFsBQdlADVSlCG8az5fXe_A",
+   t:"AQLvfZasb5lakwJ2HoU", spend:"58",ctr:"1.64%",leads:"4",cpl:"14.60",best:true},
+  {nm:"S1",seg:"res",vid:false,name:"Ready to Move In · Luxury Paradise",
+   body:"Choose from Studio to 3BHK — leasing now. 25+ world-class wellness amenities, strategic location opposite Miracle Garden, ready to move in.",
+   id:"AQJvL0OQCHWAERtfyLDZfcwgECn8qsB2gLlcTHomLuxo5R4HwnAYKgX0ssSK38jBXDrUmoCvvP_ven41gOKjHfAZtdo1PA2wthUmmB5sXIRROPxBhy_x4Lva7WwbNMl3L3WLZJ2HMt7YDSC7xEUkLwHaxkvEahHDNaymo9fTotR7e4pgCZsQU1VHv80MWwiidV_6JbYH_lUzEY0INxtUvmV-uxictr2WOzTeKHBwJrRhnQ",
+   t:"AQJeHQN5By9NIbx5AHE", spend:"115",ctr:"1.05%",leads:"3",cpl:"38.43"},
+  {nm:"S3",seg:"res",vid:false,paused:true,name:"Step Into a Lifestyle (variant)",
+   body:"Same wellness-and-luxury hook as S2, paused this month. Studio to 3BHK designer apartments, ready to move in.",
+   id:"AQJZaxPy6gi9T1PUiCIkvDSDv0Ut2o1EXPRvYzfLyi2OVHIBdtYJ1TVjDBYuZ-IERuxKZryymkAcxkYMgD7BkJuW254J5ioT-LrX_Gqs4HuKXTIgpWc9u_fHCBDMqCpUYrRquHTX4NaxRQuwLWipozbceiWCWCgjJrypQSz9A-5cpq_yfimjerp-2HytPrI3ZLkYpwclyAxGlSxSu_RQoIOBsOql0bHF5WJNB4CiMoA38g",
+   t:"AQIBbVmvI3BWNQwAYj4", spend:"332",ctr:"1.27%",leads:"7",cpl:"47.42"},
   {nm:"S1",seg:"ret",vid:false,name:"Position Your Brand in a Luxury Community",
    body:"Lease your retail space at Vincitore Benessere — a prime location in a thriving business hub, next to Dubai Miracle Garden. Lease now.",
    id:"AQJW07BfY3KCZXSqU6Erglt22wsXVLlhaH956A6l8EMeH3aUvIYKmsNKByROi3lwCyJOni88QsPuezSp6HIe9fU8WGZER7ifkczAYMoiARIYT6ZjswvOM_G1-x4tW0MNQdEfC_qeNpieusU5JS-yAPB5PcNnwlboY0nJcLGAv8Aqs-SXOQ1tTXe6-Pc9f6gInMUPQYCymtjoT8YmuDRPxDhDk6sQUszRrC6h4wEMqS0glA",
-   t:"AQL7sGhz_sWNeTUMo5w", spend:"384",ctr:"1.28%",leads:"4",cpl:"95.90"}
+   t:"AQL7sGhz_sWNeTUMo5w", spend:"384",ctr:"1.28%",leads:"4",cpl:"95.90"},
+  {nm:"S2",seg:"ret",vid:false,name:"The Prestige Address for Your Business",
+   body:"High-end retail spaces next to the iconic Dubai Miracle Garden. Lease now at Vincitore Benessere.",
+   id:"AQL-dpIGmI4aorOCUwyqnvbSvNIJZLBvKaCiFaWuEFCdzVt9UqRR57fueWgBd9yRMa9wDJm-mrmlHv4p92f6xA8TpjCtyG3v02iNoCW9ZyDG20ZTH4Rdtfykan2rXpI0iLEOI3Bz3Nt9LKFDSmdYHN4D4GyJcVnppUlJf1JLXswROucI7MJENxpibFGzJI3dypsZb1IkE15EE2OtFg_F0WjBi8_c2bEh5x7_MH76wI2R2Q",
+   t:"AQJa9wAf9aOKdw9H8bg", spend:"35",ctr:"0.22%",leads:"0",cpl:"—"}
 ];
 const adTable = [
   ["V1","res","ACTIVE","14,211.46","456,646","9,396","2.06%","1.51","600","23.69",true],
@@ -386,11 +402,13 @@ const adTable = [
   ads.forEach(a=>{
     const src=`https://business.facebook.com/ads/api/preview_iframe.php?d=${a.id}&t=${a.t}`;
     const stat=(k,v,hl)=>`<div class="s${hl?' hl':''}"><div class="k">${k}</div><div class="v">${v}</div></div>`;
-    h+=`<div class="ad"><div class="frame"><iframe loading="lazy" scrolling="no" src="${src}"></iframe></div>
+    const tag=a.tag?`<span class="badge" style="background:rgba(47,110,106,.14);color:var(--teal)">${a.tag}</span>`:'';
+    const pz=a.paused?`<span class="badge" style="background:#f0e7e2;color:#b0563c">Paused</span>`:'';
+    h+=`<div class="ad"${a.paused?' style="opacity:.78"':''}><div class="frame"><iframe loading="lazy" scrolling="no" src="${src}"></iframe></div>
       <div class="body"><div class="tagrow"><span class="badge ${seg[a.seg][0]}">${seg[a.seg][1]}</span>
       ${a.vid?'<span class="badge vid">Video</span>':'<span class="badge vid" style="background:#ece5d6;color:#8f6c2e">Static</span>'}
-      <span class="nm">${a.nm}</span></div><h4>${a.name}</h4><p>${a.body}</p>
-      <div class="stats">${stat("Spend","AED "+a.spend)}${stat("CTR",a.ctr)}${stat("Leads",a.leads,a.win)}${stat("CPL","AED "+a.cpl,a.win)}</div></div></div>`;
+      ${pz}${tag}<span class="nm">${a.nm}</span></div><h4>${a.name}</h4><p>${a.body}</p>
+      <div class="stats">${stat("Spend","AED "+a.spend)}${stat("CTR",a.ctr)}${stat("Leads",a.leads,a.win)}${stat("CPL","AED "+a.cpl,a.win||a.best)}</div></div></div>`;
   });
   document.getElementById('adgrid').innerHTML=h+`<p class="ifb" style="grid-column:1/-1">Previews render live from Meta. If a frame stays dark, it's auth-gated to your Meta session — the stats and copy still show.</p>`;
 })();
