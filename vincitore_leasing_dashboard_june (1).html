@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vincitore — Leasing Performance · June 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14181f; --ink2:#1b212b; --ink3:#232b37;
+    --ivory:#f7f3eb; --ivory2:#efe8da; --paper:#fffdf8;
+    --gold:#b68a3e; --gold-lt:#cda862; --gold-dk:#8f6c2e;
+    --teal:#2f6e6a; --teal-lt:#4a8f8a;
+    --clay:#b0563c;
+    --tx:#262b33; --tx-mut:#6d7278; --tx-inv:#e9e2d3;
+    --line:rgba(20,24,31,.12); --line-inv:rgba(247,243,235,.14);
+    --shadow:0 1px 2px rgba(20,24,31,.05),0 12px 32px -16px rgba(20,24,31,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Hanken Grotesk",system-ui,sans-serif;background:var(--ivory);color:var(--tx);
+    -webkit-font-smoothing:antialiased;line-height:1.5;font-feature-settings:"tnum" 1;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+  .serif{font-family:"Cormorant Garamond",serif}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dk)}
+  .num{font-variant-numeric:tabular-nums}
+  .mast{background:var(--ink);color:var(--tx-inv);position:relative;overflow:hidden}
+  .mast::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 85% -10%,rgba(182,138,62,.22),transparent 55%);}
+  .mast .wrap{position:relative;padding:38px 28px 46px}
+  .crest{display:flex;align-items:center;gap:14px;margin-bottom:40px}
+  .crest .mark{width:40px;height:40px;border:1.5px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold-lt);font-family:"Cormorant Garamond",serif;font-size:23px;font-weight:700;}
+  .crest .nm{font-family:"Cormorant Garamond",serif;font-size:22px;letter-spacing:.42em;text-transform:uppercase;font-weight:600;padding-left:.42em}
+  .crest .tag{margin-left:auto;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(233,226,211,.55);font-weight:600}
+  .mast h1{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:clamp(38px,6vw,68px);line-height:.98;letter-spacing:-.01em;color:var(--paper)}
+  .mast h1 em{font-style:italic;color:var(--gold-lt)}
+  .mast .sub{margin-top:18px;max-width:620px;color:rgba(233,226,211,.74);font-size:15.5px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:28px;margin-top:30px;padding-top:24px;border-top:1px solid var(--line-inv)}
+  .meta-row .it .k{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(233,226,211,.5);font-weight:700;margin-bottom:5px}
+  .meta-row .it .v{font-family:"Cormorant Garamond",serif;font-size:20px;color:var(--paper)}
+  .meta-row .it .v small{font-size:13px;color:var(--gold-lt);font-family:"Hanken Grotesk"}
+  section{padding:56px 0}
+  .shead{display:flex;align-items:baseline;gap:16px;margin-bottom:28px}
+  .shead .n{font-family:"Cormorant Garamond",serif;font-size:19px;color:var(--gold);font-weight:600;font-style:italic}
+  .shead h2{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:30px;letter-spacing:-.01em}
+  .shead .ln{flex:1;height:1px;background:var(--line)}
+  .lead-in{color:var(--tx-mut);max-width:660px;margin:-14px 0 26px;font-size:15px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  .kpi{background:var(--paper);padding:22px 20px 20px}
+  .kpi .k{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--tx-mut);font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:7px}
+  .kpi .k::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold)}
+  .kpi.tl .k::before{background:var(--teal)}
+  .kpi .v{font-family:"Cormorant Garamond",serif;font-size:40px;line-height:1;font-weight:600;letter-spacing:-.02em}
+  .kpi .v .cur{font-size:18px;color:var(--tx-mut);font-family:"Hanken Grotesk";font-weight:600;vertical-align:top;margin-right:2px}
+  .kpi .d{margin-top:9px;font-size:12.5px;color:var(--tx-mut)}
+  .kpi .d b{color:var(--teal);font-weight:700}
+  .journey{background:var(--ink2);border-radius:6px;padding:34px 30px 30px;color:var(--tx-inv)}
+  .jtrack{display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative}
+  .jstep{position:relative;padding:0 14px}
+  .jstep:not(:last-child)::after{content:"";position:absolute;right:-1px;top:14px;width:1px;height:78px;background:var(--line-inv)}
+  .jstep .lbl{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(233,226,211,.55);font-weight:700;margin-bottom:10px}
+  .jstep .big{font-family:"Cormorant Garamond",serif;font-size:33px;font-weight:600;line-height:1;color:var(--paper)}
+  .jstep .pct{font-size:12px;margin-top:8px;color:var(--gold-lt);font-weight:600}
+  .jstep .sub{font-size:11.5px;color:rgba(233,226,211,.5);margin-top:3px}
+  .jbar{margin-top:26px;height:8px;border-radius:6px;display:flex;overflow:hidden;background:rgba(247,243,235,.07)}
+  .jbar span{display:block;height:100%}
+  .jnote{margin-top:16px;font-size:12.5px;color:rgba(233,226,211,.55);display:flex;gap:8px;align-items:flex-start}
+  .jnote b{color:var(--gold-lt);font-weight:700}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .ccard{background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:24px 24px 22px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .ccard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
+  .ccard.res::before{background:var(--gold)} .ccard.ret::before{background:var(--teal)}
+  .ccard .ct{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px}
+  .ccard .ct h3{font-family:"Cormorant Garamond",serif;font-size:24px;font-weight:600}
+  .ccard .ct .stat{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:4px 9px;border-radius:20px}
+  .ccard.res .stat{background:rgba(182,138,62,.13);color:var(--gold-dk)}
+  .ccard.ret .stat{background:rgba(47,110,106,.13);color:var(--teal)}
+  .cgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px 14px}
+  .cgrid .c .k{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx-mut);font-weight:700;margin-bottom:4px}
+  .cgrid .c .v{font-family:"Cormorant Garamond",serif;font-size:25px;font-weight:600;line-height:1}
+  .cgrid .c .v small{font-size:13px;color:var(--tx-mut);font-family:"Hanken Grotesk"}
+  .chart-card{background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:26px 26px 18px;box-shadow:var(--shadow)}
+  .clegend{display:flex;gap:22px;margin-bottom:18px;font-size:12.5px;color:var(--tx-mut);font-weight:600}
+  .clegend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:7px;vertical-align:-1px}
+  .clegend .l2 i{border-radius:50%;background:var(--teal)} .clegend .l1 i{background:var(--gold)}
+  svg{display:block;width:100%;height:auto;overflow:visible}
+  .ads{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .ad{background:var(--paper);border:1px solid var(--line);border-radius:6px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .ad .frame{background:#0e0e10;display:grid;place-items:center;padding:14px}
+  .ad iframe{width:335px;max-width:100%;height:450px;border:0;border-radius:4px;background:#1a1a1a}
+  .ad .body{padding:18px 20px 20px}
+  .ad .tagrow{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .ad .badge{font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;padding:3px 8px;border-radius:4px}
+  .ad .badge.res{background:rgba(182,138,62,.14);color:var(--gold-dk)}
+  .ad .badge.ret{background:rgba(47,110,106,.14);color:var(--teal)}
+  .ad .badge.vid{background:var(--ink);color:var(--gold-lt)}
+  .ad .nm{font-family:"Cormorant Garamond",serif;font-size:21px;font-weight:600;margin-left:auto;color:var(--tx)}
+  .ad h4{font-size:14px;font-weight:700;margin-bottom:6px;line-height:1.35}
+  .ad p{font-size:12.5px;color:var(--tx-mut);line-height:1.5}
+  .ad .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line);margin-top:16px}
+  .ad .stats .s{background:var(--paper);padding:11px 8px;text-align:center}
+  .ad .stats .s .k{font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--tx-mut);font-weight:700}
+  .ad .stats .s .v{font-family:"Cormorant Garamond",serif;font-size:20px;font-weight:600;margin-top:2px}
+  .ad .stats .s.hl .v{color:var(--gold-dk)}
+  .ifb{font-size:12px;color:var(--tx-mut);margin-top:6px}
+  .tbl-wrap{background:var(--paper);border:1px solid var(--line);border-radius:5px;overflow-x:auto;box-shadow:var(--shadow)}
+  table{width:100%;border-collapse:collapse;min-width:720px}
+  th,td{padding:13px 16px;text-align:right;font-size:13.5px;white-space:nowrap}
+  th{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--tx-mut);font-weight:700;border-bottom:1.5px solid var(--line);background:var(--ivory2)}
+  th:first-child,td:first-child{text-align:left}
+  td{border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+  tbody tr:hover{background:var(--ivory)}
+  td .anm{font-weight:700}
+  td .chip{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;margin-left:8px}
+  .chip.res{background:rgba(182,138,62,.13);color:var(--gold-dk)}
+  .chip.ret{background:rgba(47,110,106,.13);color:var(--teal)}
+  .chip.pz{background:rgba(109,114,120,.13);color:var(--tx-mut)}
+  tr.win td{background:rgba(182,138,62,.05)}
+  .best{color:var(--gold-dk);font-weight:700} .warnv{color:var(--clay);font-weight:700}
+  .crm{display:grid;grid-template-columns:1.15fr .85fr;gap:22px}
+  .panel{background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:24px;box-shadow:var(--shadow)}
+  .panel h3{font-family:"Cormorant Garamond",serif;font-size:22px;font-weight:600;margin-bottom:4px}
+  .panel .ph{font-size:12.5px;color:var(--tx-mut);margin-bottom:20px}
+  .frow{display:flex;align-items:center;gap:12px;margin-bottom:11px}
+  .frow .fl{width:140px;font-size:12.5px;font-weight:600;color:var(--tx);flex-shrink:0}
+  .frow .ft{flex:1;height:22px;background:var(--ivory2);border-radius:4px;overflow:hidden}
+  .frow .ft span{display:block;height:100%;border-radius:4px}
+  .frow .fv{width:74px;text-align:right;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+  .frow .fv small{color:var(--tx-mut);font-weight:500}
+  .b-hot{background:linear-gradient(90deg,var(--gold-dk),var(--gold-lt))}
+  .b-warm{background:var(--gold-lt)} .b-cold{background:var(--clay);opacity:.7}
+  .b-dead{background:#aeb3b8} .b-teal{background:linear-gradient(90deg,var(--teal),var(--teal-lt))}
+  .otable{width:100%;border-collapse:collapse}
+  .otable th,.otable td{padding:9px 8px;font-size:12.5px;text-align:right}
+  .otable th:first-child,.otable td:first-child{text-align:left}
+  .otable th{font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--tx-mut);font-weight:700;border-bottom:1.5px solid var(--line)}
+  .otable td{border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+  .otable td:first-child{font-weight:600}
+  .qbar{display:inline-block;height:7px;border-radius:4px;background:var(--gold);vertical-align:middle;margin-left:6px}
+  .donut-wrap{display:flex;align-items:center;gap:24px}
+  .dlegend .dl{display:flex;align-items:center;gap:9px;font-size:13px;margin-bottom:10px}
+  .dlegend .dl i{width:11px;height:11px;border-radius:3px;flex-shrink:0}
+  .dlegend .dl b{font-variant-numeric:tabular-nums}
+  .dlegend .dl small{color:var(--tx-mut);margin-left:auto;padding-left:14px}
+  .takes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .take{background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:22px 22px 20px;border-top:3px solid var(--gold);box-shadow:var(--shadow)}
+  .take.warn{border-top-color:var(--clay)} .take.good{border-top-color:var(--teal)}
+  .take .tk{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--gold-dk);margin-bottom:9px}
+  .take.warn .tk{color:var(--clay)} .take.good .tk{color:var(--teal)}
+  .take h4{font-family:"Cormorant Garamond",serif;font-size:21px;font-weight:600;line-height:1.2;margin-bottom:9px}
+  .take p{font-size:13.5px;color:var(--tx-mut);line-height:1.55}
+  .take p b{color:var(--tx);font-weight:700}
+  footer{background:var(--ink);color:rgba(233,226,211,.6);padding:34px 0;margin-top:20px}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;font-size:12.5px}
+  footer .nm{font-family:"Cormorant Garamond",serif;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-lt);font-size:15px}
+  @media(max-width:860px){
+    .kpis{grid-template-columns:repeat(2,1fr)} .split,.crm,.ads{grid-template-columns:1fr}
+    .takes{grid-template-columns:1fr} .jtrack{grid-template-columns:repeat(3,1fr);gap:22px 0}
+    .jstep:nth-child(3)::after{display:none} .jstep .big{font-size:27px} .meta-row{gap:20px}
+  }
+  @media(max-width:520px){ .kpis{grid-template-columns:1fr} .cgrid{grid-template-columns:1fr 1fr} }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="crest"><div class="mark">V</div><div class="nm">Vincitore</div><div class="tag">Realty · Dubai</div></div>
+    <div class="eyebrow" style="color:var(--gold-lt);margin-bottom:16px">Leasing Performance · Month to Date</div>
+    <h1 class="serif">June, from <em>impression</em><br>to <em>interested</em> tenant.</h1>
+    <p class="sub">This month's Benessere leasing funnel — Meta Ads delivery joined to the LeadSquared CRM, tracing every dirham of June spend through to a qualified, contactable lead.</p>
+    <div class="meta-row">
+      <div class="it"><div class="k">Ad Account</div><div class="v">Vincitore NEW Ad Account&nbsp;<small>·1</small></div></div>
+      <div class="it"><div class="k">Reporting Window</div><div class="v">June 1 – 25, 2026</div></div>
+      <div class="it"><div class="k">Campaigns</div><div class="v">Residential&nbsp;<small>+ Retail leasing</small></div></div>
+      <div class="it"><div class="k">CRM Source</div><div class="v">LeadSquared&nbsp;<small>· FB Lead Ads</small></div></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><span class="n">I.</span><h2 class="serif">June at a glance</h2><span class="ln"></span></div>
+    <div class="kpis">
+      <div class="kpi"><div class="k">Spend (MTD)</div><div class="v"><span class="cur">AED</span>18,362</div><div class="d">Two active leasing campaigns</div></div>
+      <div class="kpi"><div class="k">Meta Form Leads</div><div class="v">743</div><div class="d"><b>739</b> residential · <b>4</b> retail</div></div>
+      <div class="kpi tl"><div class="k">Blended CPL</div><div class="v"><span class="cur">AED</span>24.71</div><div class="d">Cost per Meta lead form</div></div>
+      <div class="kpi"><div class="k">Impressions</div><div class="v">555.8<span class="cur" style="font-size:14px">K</span></div><div class="d">Reach <b>234.8K</b> · freq 2.38×</div></div>
+      <div class="kpi"><div class="k">Link Clicks</div><div class="v">10,884</div><div class="d">Blended CTR <b>1.96%</b></div></div>
+      <div class="kpi"><div class="k">Lead Records</div><div class="v">743</div><div class="d"><b>653</b> new · <b>90</b> re-enquiry</div></div>
+      <div class="kpi tl"><div class="k">Contacted</div><div class="v">94%</div><div class="d">613 of 653 new · ≥1 call</div></div>
+      <div class="kpi"><div class="k">Hot / Qualified</div><div class="v">36</div><div class="d"><b>32</b> marked Interested</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="shead"><span class="n">II.</span><h2 class="serif">The lead journey</h2><span class="ln"></span></div>
+    <p class="lead-in">Every June stage as a share of the one before it. Your two CRM exports split into new registrations and re-enquiries. Every Meta lead is accounted for in the CRM — 743 to 743 — so the focus is purely on converting the workable leads faster.</p>
+    <div class="journey">
+      <div class="jtrack">
+        <div class="jstep"><div class="lbl">Impressions</div><div class="big num">555.8K</div><div class="sub">234.8K people reached</div></div>
+        <div class="jstep"><div class="lbl">Link Clicks</div><div class="big num">10,884</div><div class="pct">1.96% CTR</div></div>
+        <div class="jstep"><div class="lbl">Meta Leads</div><div class="big num">743</div><div class="pct">6.8% of clicks</div></div>
+        <div class="jstep"><div class="lbl">CRM Records</div><div class="big num">743</div><div class="pct">100% synced</div></div>
+        <div class="jstep"><div class="lbl">Contacted</div><div class="big num">613</div><div class="pct">94% of new</div></div>
+        <div class="jstep"><div class="lbl">Hot / Qualified</div><div class="big num" style="color:var(--gold-lt)">36</div><div class="pct">5.5% of new</div></div>
+      </div>
+      <div class="jbar">
+        <span style="width:40%;background:rgba(247,243,235,.16)"></span>
+        <span style="width:22%;background:var(--teal)"></span>
+        <span style="width:16%;background:var(--gold-dk)"></span>
+        <span style="width:13%;background:var(--gold)"></span>
+        <span style="width:9%;background:var(--gold-lt)"></span>
+      </div>
+      <div class="jnote"><b>Lead accounting —</b><span>CRM holds <b>743 lead records</b>, matching Meta 1:1. Of these, <b>653 are new registrations</b> and the remaining <b>90 are re-enquiries</b> — returning leads who raised their hand again. Re-enquiries are 12% of demand: a strong repeat-intent signal worth routing to senior closers.</span></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="shead"><span class="n">III.</span><h2 class="serif">Residential vs. retail</h2><span class="ln"></span></div>
+    <p class="lead-in">In June, residential is almost the entire story — 98% of spend at a CPL roughly 4× cheaper than retail. Retail delivery is light this month and worth a creative refresh before scaling.</p>
+    <div class="split">
+      <div class="ccard res">
+        <div class="ct"><h3 class="serif">Residential Leasing</h3><span class="stat">98% of spend</span></div>
+        <div class="cgrid">
+          <div class="c"><div class="k">Spend</div><div class="v"><small>AED</small>17,944</div></div>
+          <div class="c"><div class="k">Leads</div><div class="v">739</div></div>
+          <div class="c"><div class="k">CPL</div><div class="v"><small>AED</small>24.28</div></div>
+          <div class="c"><div class="k">Impr.</div><div class="v">550.9K</div></div>
+          <div class="c"><div class="k">CTR</div><div class="v">1.97%</div></div>
+          <div class="c"><div class="k">CPC</div><div class="v"><small>AED</small>1.66</div></div>
+        </div>
+      </div>
+      <div class="ccard ret">
+        <div class="ct"><h3 class="serif">Retail Leasing</h3><span class="stat">2% of spend</span></div>
+        <div class="cgrid">
+          <div class="c"><div class="k">Spend</div><div class="v"><small>AED</small>419</div></div>
+          <div class="c"><div class="k">Leads</div><div class="v">4</div></div>
+          <div class="c"><div class="k">CPL</div><div class="v"><small>AED</small>104.7</div></div>
+          <div class="c"><div class="k">Impr.</div><div class="v">4.9K</div></div>
+          <div class="c"><div class="k">CTR</div><div class="v">1.18%</div></div>
+          <div class="c"><div class="k">CPC</div><div class="v"><small>AED</small>7.22</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="shead"><span class="n">IV.</span><h2 class="serif">Daily pace · June</h2><span class="ln"></span></div>
+    <div class="chart-card">
+      <div class="clegend"><span class="l1"><i></i>Daily spend (AED)</span><span class="l2"><i></i>Leads per day</span></div>
+      <svg id="trend" viewBox="0 0 1080 320" role="img" aria-label="Daily spend and leads for June"></svg>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="shead"><span class="n">V.</span><h2 class="serif">Creative on the feed</h2><span class="ln"></span></div>
+    <p class="lead-in">Live Meta previews of June's running creatives with what each delivered this month. The video hook <b>V1</b> alone drove 81% of residential leads at the lowest cost per lead.</p>
+    <div class="ads" id="adgrid"></div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="shead"><span class="n">VI.</span><h2 class="serif">Ad-level ledger · June</h2><span class="ln"></span></div>
+    <div class="tbl-wrap">
+      <table id="adtable">
+        <thead><tr><th>Ad</th><th>Spend (AED)</th><th>Impr.</th><th>Clicks</th><th>CTR</th><th>CPC</th><th>Leads</th><th>CPL (AED)</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="shead"><span class="n">VII.</span><h2 class="serif">What to do next</h2><span class="ln"></span></div>
+    <div class="takes">
+      <div class="take good">
+        <div class="tk">Scale the winner</div>
+        <h4 class="serif">Push budget behind V1</h4>
+        <p>The <b>V1</b> video delivered June leads at <b>AED 23.69</b> — 81% of residential volume (600 leads). Headroom to scale spend and test fresh video hooks against the same offer.</p>
+      </div>
+      <div class="take good">
+        <div class="tk">Returning demand</div>
+        <h4 class="serif">90 leads are re-enquiries</h4>
+        <p><b>90 of 743 leads (12%)</b> are returning enquirers — people who came back after an earlier touch. Repeat intent is the warmest signal in the set; route them straight to a senior closer.</p>
+      </div>
+      <div class="take">
+        <div class="tk">Lift quality</div>
+        <h4 class="serif">Attack the 55% unworkable</h4>
+        <p>Most leads stall at "Not Answered" or "Irrelevant." Faster first-call SLAs lifted quality for <b>Nisha (53%) &amp; Ruchita (60%)</b> — replicate their call cadence across the desk.</p>
+      </div>
+      <div class="take warn">
+        <div class="tk">Re-tune retail</div>
+        <h4 class="serif">Retail CPL is 4× residential</h4>
+        <p>June retail sits at <b>AED 104.68</b> per lead on just 4 leads. Refresh the creative angle and tighten targeting before adding budget — treat it as a live test, not a scaled line.</p>
+      </div>
+      <div class="take good">
+        <div class="tk">Speed to lead</div>
+        <h4 class="serif">Call the 40 untouched leads</h4>
+        <p><b>40 paid June leads</b> have zero call attempts logged. Already bought and paid for — working them today is the cheapest pipeline available this month.</p>
+      </div>
+      <div class="take">
+        <div class="tk">Protect the funnel</div>
+        <h4 class="serif">Watch frequency</h4>
+        <p>Residential frequency is <b>2.38×</b> and rising. Refresh audiences and creative before fatigue lifts CPM — CPL already creeps on lower-volume days (e.g. Jun 9 &amp; 17).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="nm">Vincitore</span>
+    <span>June 2026 leasing performance · Meta Ads × LeadSquared · Generated Jun 25, 2026</span>
+    <span style="color:rgba(233,226,211,.4)">Vincitore NEW Ad Account ·1 &amp; CRM export</span>
+  </div>
+</footer>
+
+<script>
+const daily = [
+  ["1",1112,29],["2",1741,77],["3",1100,39],["4",652,32],["5",1052,46],["6",1272,55],
+  ["7",1164,50],["8",959,35],["9",130,4],["10",967,30],["11",1244,44],["12",899,34],
+  ["13",437,20],["14",587,31],["15",471,26],["16",447,24],["17",164,7],["18",505,20],
+  ["19",705,31],["20",621,31],["21",549,21],["22",584,17],["23",549,20],["24",0,0],["25",452,20]
+];
+const ads = [
+  {nm:"V1",seg:"res",vid:true,name:"Starting From Just 55,000 AED",
+   body:"Rent more than an apartment — rent a lifestyle you never want to leave. Swimmable lagoon pool, floating-island gym, Zen & Miracle Garden views. Studios, 1–3 BHK.",
+   id:"AQJFnBDhfHcsdLocy7A6QlYStyS2d70jvTtbYTKaCVB2g8ShVjmO-CYjaOvEI2BRR_6zTpZJ_SQj6VErHf5altAMvaWL-gw97xUN7JRGaU1pMhZ1CPWizTJ3bjxMgEJuOGAgefDfyxP_gQlKMHeUQG-KmQKgw5DnLnoBkdUOs-uKjEboD-6vTxY-SVWgUBzTj0VIjswJ6dwnk_-VqmZq0EzjHQeKP713KOTxPikhleEoMA",
+   t:"AQJCiSo2TMicaiGxvpE", spend:"14,211",ctr:"2.06%",leads:"600",cpl:"23.69",win:true},
+  {nm:"S4",seg:"res",vid:false,name:"Rent a Paradise · Studio to 3BHK",
+   body:"A residence that defines modern living. 25+ world-class wellness amenities, opposite Miracle Garden, ready to move in. Leasing now.",
+   id:"AQJbZqWHAwT3HU-JFH0i1NhkGQg9c0yiaKTfrf0Md0lY6TeMOPa0HfaQTEbs8cmptP9YV35z7psHtTrt7LXjbcg3Df7j_1Wu8iEI_tS_63VHK_SJZPDH5htoK_Xt68t30BY94AWjkPTCQ0e2jaoGBgOnCEvy2LAHbbcAU3CejSxb2P6_99W5LKHRhO-gBvPxwEMnBXOIYF8mpXiDb2nHVCiXEDSxGk3ufum90D-vFMWdfw",
+   t:"AQJczu8MG35gYNPoulw", spend:"1,975",ctr:"1.60%",leads:"87",cpl:"22.70"},
+  {nm:"V2",seg:"res",vid:true,name:"Crafting Timeless Masterpieces",
+   body:"Rent more than an apartment — rent a lifestyle. Dubai's most unique wellness address. Studios, 1, 2 & 3 BHK available for rent. Units filling up fast.",
+   id:"AQI6ch9cbFuEKjGSIx23uG54YCjdnx9hbwAv14FYzsbMYBkh8upjuF7lZh-FNC8XdfVcYdxFeMU9mYaqnMsfnwtU3idEspFwjMVUOVohmHij5Om-tU4nnF-zx7dq7nr_KSUAOYAulVLi8NsX4oRTWce_152qKzDiYICriqIvgFlDSTA_tRORG2gUoBptbhSD88-mGdLpDFVAz2LJ14GsCKhDczGVqF7TW_ePJiUY8mSz1A",
+   t:"AQJy7AdB4J3VSD4oXGU", spend:"1,251",ctr:"1.51%",leads:"38",cpl:"32.93"},
+  {nm:"S1",seg:"ret",vid:false,name:"Position Your Brand in a Luxury Community",
+   body:"Lease your retail space at Vincitore Benessere — a prime location in a thriving business hub, next to Dubai Miracle Garden. Lease now.",
+   id:"AQJW07BfY3KCZXSqU6Erglt22wsXVLlhaH956A6l8EMeH3aUvIYKmsNKByROi3lwCyJOni88QsPuezSp6HIe9fU8WGZER7ifkczAYMoiARIYT6ZjswvOM_G1-x4tW0MNQdEfC_qeNpieusU5JS-yAPB5PcNnwlboY0nJcLGAv8Aqs-SXOQ1tTXe6-Pc9f6gInMUPQYCymtjoT8YmuDRPxDhDk6sQUszRrC6h4wEMqS0glA",
+   t:"AQL7sGhz_sWNeTUMo5w", spend:"384",ctr:"1.28%",leads:"4",cpl:"95.90"}
+];
+const adTable = [
+  ["V1","res","ACTIVE","14,211.46","456,646","9,396","2.06%","1.51","600","23.69",true],
+  ["S4","res","ACTIVE","1,975.24","48,371","773","1.60%","2.56","87","22.70",false],
+  ["V2","res","ACTIVE","1,251.39","31,289","472","1.51%","2.65","38","32.93",false],
+  ["S3","res","PAUSED","331.94","9,312","118","1.27%","2.81","7","47.42",false],
+  ["S1·res","res","ACTIVE","115.28","3,324","35","1.05%","3.29","3","38.43",false],
+  ["S2·res","res","ACTIVE","58.40","1,949","32","1.64%","1.83","4","14.60",false],
+  ["S1·retail","ret","ACTIVE","383.61","4,453","57","1.28%","6.73","4","95.90",false],
+  ["S2·retail","ret","ACTIVE","35.10","456","1","0.22%","35.10","0","—",false]
+];
+
+(function(){
+  const W=1080,H=320,pl=44,pr=44,pt=18,pb=40;
+  const iw=W-pl-pr, ih=H-pt-pb, maxS=1800, maxL=80, n=daily.length;
+  const step=iw/n, bw=step*0.52; let s='';
+  for(let i=0;i<=4;i++){const y=pt+ih*i/4, val=maxS-maxS*i/4;
+    s+=`<line x1="${pl}" y1="${y}" x2="${W-pr}" y2="${y}" stroke="rgba(20,24,31,.08)"/>`;
+    s+=`<text x="${pl-8}" y="${y+4}" text-anchor="end" font-size="11" fill="#9aa0a6" font-family="Hanken Grotesk">${val>=1000?(val/1000)+'k':val}</text>`;}
+  daily.forEach((d,i)=>{const x=pl+step*i+step/2, h=d[1]/maxS*ih;
+    s+=`<rect x="${x-bw/2}" y="${pt+ih-h}" width="${bw}" height="${h}" rx="2.5" fill="#b68a3e" opacity="${d[1]<300?.45:.85}"/>`;
+    s+=`<text x="${x}" y="${H-pb+18}" text-anchor="middle" font-size="10" fill="#9aa0a6" font-family="Hanken Grotesk">${d[0]}</text>`;});
+  let pts=daily.map((d,i)=>[pl+step*i+step/2, pt+ih-(d[2]/maxL*ih)]);
+  s+=`<path d="${pts.map((p,i)=>(i?'L':'M')+p[0]+' '+p[1]).join(' ')}" fill="none" stroke="#2f6e6a" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`;
+  pts.forEach(p=>{s+=`<circle cx="${p[0]}" cy="${p[1]}" r="3.2" fill="#fffdf8" stroke="#2f6e6a" stroke-width="2"/>`;});
+  for(let i=0;i<=4;i++){const y=pt+ih*i/4, val=maxL-maxL*i/4;
+    s+=`<text x="${W-pr+8}" y="${y+4}" text-anchor="start" font-size="11" fill="#2f6e6a" font-family="Hanken Grotesk">${val}</text>`;}
+  document.getElementById('trend').innerHTML=s;
+})();
+
+(function(){
+  const seg={res:["res","Residential"],ret:["ret","Retail"]};let h='';
+  ads.forEach(a=>{
+    const src=`https://business.facebook.com/ads/api/preview_iframe.php?d=${a.id}&t=${a.t}`;
+    const stat=(k,v,hl)=>`<div class="s${hl?' hl':''}"><div class="k">${k}</div><div class="v">${v}</div></div>`;
+    h+=`<div class="ad"><div class="frame"><iframe loading="lazy" scrolling="no" src="${src}"></iframe></div>
+      <div class="body"><div class="tagrow"><span class="badge ${seg[a.seg][0]}">${seg[a.seg][1]}</span>
+      ${a.vid?'<span class="badge vid">Video</span>':'<span class="badge vid" style="background:#ece5d6;color:#8f6c2e">Static</span>'}
+      <span class="nm">${a.nm}</span></div><h4>${a.name}</h4><p>${a.body}</p>
+      <div class="stats">${stat("Spend","AED "+a.spend)}${stat("CTR",a.ctr)}${stat("Leads",a.leads,a.win)}${stat("CPL","AED "+a.cpl,a.win)}</div></div></div>`;
+  });
+  document.getElementById('adgrid').innerHTML=h+`<p class="ifb" style="grid-column:1/-1">Previews render live from Meta. If a frame stays dark, it's auth-gated to your Meta session — the stats and copy still show.</p>`;
+})();
+
+(function(){
+  const chip={res:'<span class="chip res">Res</span>',ret:'<span class="chip ret">Ret</span>'};
+  let h='';adTable.forEach(r=>{const paused=r[2]==='PAUSED';
+    const cplWarn=r[9]!=='—'&&parseFloat(String(r[9]).replace(',',''))>90;
+    h+=`<tr class="${r[10]?'win':''}"><td><span class="anm">${r[0]}</span>${chip[r[1]]}${paused?'<span class="chip pz">Paused</span>':''}</td>
+      <td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td><td>${r[7]}</td>
+      <td class="${r[10]?'best':''}">${r[8]}</td><td class="${cplWarn?'warnv':(r[10]?'best':'')}">${r[9]}</td></tr>`;});
+  document.querySelector('#adtable tbody').innerHTML=h;
+})();
+
+
+
+</script>
+</body>
+</html>
